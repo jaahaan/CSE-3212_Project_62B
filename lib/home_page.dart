@@ -36,6 +36,16 @@ class HomePage extends StatelessWidget {
           ListTile(onTap: () {}, title: Text("HomePage")),
         ],
       ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Welcome to homepage!!!", style: TextStyle(fontSize: 20)),
+
+            Image.asset('assets/images/flutter.png'),
+          ],
+        ),
+      ),
     );
   }
 }
