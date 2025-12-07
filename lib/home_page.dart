@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ProfilePage()),
                       );
@@ -73,6 +73,29 @@ class HomePage extends StatelessWidget {
                 ],
               ),
 
+              // SizedBox(height: 20),
+              SizedBox(
+                height: 300,
+                width: 300,
+                child: Card(
+                  color: Colors.amber,
+                  child: Center(child: Text("Card")),
+                ),
+              ),
+              Container(
+                height: 300,
+                width: 300,
+                padding: EdgeInsets.all(20),
+                margin: EdgeInsets.all(20),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  border: Border.all(color: Colors.yellowAccent, width: 5),
+                  // borderRadius: BorderRadius.all(Radius.circular(20)),
+                  shape: BoxShape.circle,
+                ),
+                child: Text("Container"),
+              ),
               Image.asset('assets/images/flutter.png', height: 300),
               // Image.asset(
               //   'assets/images/images.jpeg',
