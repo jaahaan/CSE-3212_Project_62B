@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_62b/widgets/input_field.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -9,6 +10,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
   String name = "";
   @override
   Widget build(BuildContext context) {
@@ -26,29 +29,32 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextFormField(
+              InputField(
                 controller: nameController,
                 keyboardType: TextInputType.text,
-                // obscureText: true,
-                decoration: InputDecoration(
-                  labelText: "Name",
-                  hintText: "Enter Name",
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),
-                ),
+                label: "Name",
+                hint: "Enter Name",
+                icon: Icons.person,
+              ),
+
+              InputField(
+                controller: emailController,
+                keyboardType: TextInputType.visiblePassword,
+                label: "Email",
+                hint: "Enter Email",
+                icon: Icons.email,
               ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  name = nameController.text;
+                  name = "Name is: ${nameController.text}";
                   setState(() {});
                 },
                 child: Text("Submit"),
               ),
               SizedBox(height: 20),
-              Text("Name is: $name"),
+
+              Text(name),
             ],
           ),
         ),
