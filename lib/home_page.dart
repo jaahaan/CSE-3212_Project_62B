@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_62b/converter_page.dart';
+import 'package:project_62b/gridview_page.dart';
+import 'package:project_62b/listview_page.dart';
 import 'package:project_62b/profile_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -50,29 +53,80 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
+                        MaterialPageRoute(builder: (context) => ListviewPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueGrey,
+                      foregroundColor: Colors.white,
+                      elevation: 5,
+                      fixedSize: Size(150, 50),
+                    ),
+                    child: Text("ListView"),
+                  ),
+
+                  SizedBox(width: 20),
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => GridviewPage()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueGrey,
+                      foregroundColor: Colors.white,
+                      elevation: 5,
+                      fixedSize: Size(150, 50),
+                    ),
+                    child: Text("GridView"),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 20),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ConverterPage(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blueGrey,
+                      foregroundColor: Colors.white,
+                      elevation: 5,
+                      fixedSize: Size(150, 50),
+                    ),
+                    child: Text("Converter"),
+                  ),
+
+                  SizedBox(width: 20),
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(builder: (context) => ProfilePage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blueGrey,
                       foregroundColor: Colors.white,
-                      shape: BeveledRectangleBorder(),
+                      elevation: 5,
+                      fixedSize: Size(150, 50),
                     ),
-                    child: Text("Elevated"),
-                  ),
-
-                  OutlinedButton(onPressed: () {}, child: Text("Outlined")),
-
-                  TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.blueGrey,
-                    ),
-                    child: Text("Text"),
+                    child: Text("ProfilePage"),
                   ),
                 ],
               ),
-
               // SizedBox(height: 20),
               SizedBox(
                 height: 300,
