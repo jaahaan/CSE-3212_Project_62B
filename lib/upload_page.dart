@@ -52,7 +52,9 @@ class _UploadPageState extends State<UploadPage> {
             _imageBytes!,
             fileOptions: FileOptions(contentType: 'image/$_fileExtension'),
           );
-      String imageUrl = getPublicImageUrl(fileName);
+      String imageUrl = Supabase.instance.client.storage
+          .from('images')
+          .getPublicUrl(fileName);
       print(imageUrl);
       final user = _supabase.auth.currentUser;
       if (user != null) {
@@ -75,10 +77,6 @@ class _UploadPageState extends State<UploadPage> {
     setState(() {
       _isLoading = false;
     });
-  }
-
-  String getPublicImageUrl(String path) {
-    return Supabase.instance.client.storage.from('images').getPublicUrl(path);
   }
 
   @override

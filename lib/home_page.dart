@@ -3,7 +3,7 @@ import 'package:project_62b/auth/login_page.dart';
 import 'package:project_62b/converter_page.dart';
 import 'package:project_62b/gridview_page.dart';
 import 'package:project_62b/listview_page.dart';
-import 'package:project_62b/profile_page.dart';
+import 'package:project_62b/note_page.dart';
 import 'package:project_62b/upload_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -58,13 +58,52 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: NavigationDrawer(
         children: [
-          DrawerHeader(
-            child: UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.blueGrey),
-              accountName: Text("Name"),
-              accountEmail: Text("Email"),
-            ),
+          FutureBuilder(
+            future: getCurrentUser(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return Text("Error ${snapshot.error}");
+              }
+              if (!snapshot.hasData) {
+                return const Text("No User Found!!");
+              }
+              final profile = snapshot.data as Map<String, dynamic>;
+              return SizedBox(
+                width: 300,
+                height: 300,
+                child: Card(
+                  color: Colors.blueGrey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      DrawerHeader(
+                        child: UserAccountsDrawerHeader(
+                          decoration: BoxDecoration(color: Colors.blueGrey),
+                          currentAccountPictureSize: Size.square(100.0),
+                          currentAccountPicture:
+                              profile['avatar_url'] != null
+                                  ? Image.network(
+                                    profile['avatar_url'],
+                                    height: 40,
+                                    width: 40,
+                                    fit: BoxFit.cover,
+                                  )
+                                  : null,
+
+                          accountName: Text("Name: ${profile['name']}"),
+                          accountEmail: Text("Email: ${profile['email']}"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
+
           ListTile(onTap: () {}, title: Text("HomePage")),
         ],
       ),
@@ -200,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()),
+                        MaterialPageRoute(builder: (context) => NotePage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -209,7 +248,7 @@ class _HomePageState extends State<HomePage> {
                       elevation: 5,
                       fixedSize: Size(150, 50),
                     ),
-                    child: Text("ProfilePage"),
+                    child: Text("Note Page"),
                   ),
                 ],
               ),
